@@ -1,0 +1,53 @@
+﻿@model MessageModel
+@{
+    ViewData["Title"] = "Labaratornay 2 Page";
+}
+<link rel="stylesheet" href="~/css/Lab2.css" />
+<h1>Лабораторная работа 2</h1>
+<form asp-action="Send">
+    <div class="form-horizontal">
+        <h3>Контактная форма</h3>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Email" class="col-md-1 control-label"></label>
+            <div class="col-md-11">
+                <input asp-for="Email" class="form-control" type="email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Topic" class="col-md-1 control-label">Тема</label>
+            <div class="col-md-11">
+                <input asp-for="Topic" class="form-control" type="text" />
+                <span asp-validation-for="Topic" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Text" class="col-md-1 control-label">Текст</label>
+            <div class="col-md-11">
+                <textarea asp-for="Text" class="form-control" style="min-height:100px;resize:vertical"></textarea>
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-2">
+                <input type="submit" value="Отправить" class="btn btn-default" style="margin-bottom: 12px; width: 100%" />
+            </div>
+            <div class="col-md-9" align="right">
+                @if (ViewBag.SuccessMessage != null)
+                {
+                    <div class="alert alert-success" role="alert">@Html.Raw(ViewBag.SuccessMessage)</div>
+                }
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div class="alert alert-danger" role="alert">@Html.Raw(ViewBag.ErrorMessage)</div>
+                }
+            </div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
